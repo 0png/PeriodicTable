@@ -1,0 +1,135 @@
+/* --- 1. 基礎變數設定 --- */
+:root {
+    --bg-color: #f0f2f5;
+    --nav-bg: #ffffff;
+    --card-bg: #ffffff;
+    --text-main: #333333;
+    --text-sub: #777777;
+    --border-color: #cccccc;
+    --accent: #007bff;
+    --accent-hover: #0056b3;
+    --correct-bg: #d4edda;
+    --correct-border: #28a745;
+    --wrong-bg: #f8d7da;
+    --wrong-border: #dc3545;
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+}
+
+/* --- 2. 黑暗模式顏色 --- */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --nav-bg: #1e1e1e;
+    --card-bg: #2d2d2d;
+    --text-main: #e0e0e0;
+    --text-sub: #aaaaaa;
+    --border-color: #444444;
+    --accent: #4dabf7;
+    --accent-hover: #74c0fc;
+    --correct-bg: #1b4332;
+    --wrong-bg: #641220;
+    --modal-overlay: rgba(0, 0, 0, 0.8);
+}
+
+/* --- 3. 全域樣式 --- */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+}
+
+/* --- 4. 導覽列 & 主題按鈕 --- */
+.navbar {
+    background: var(--nav-bg);
+    padding: 0.8rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links { display: flex; gap: 10px; }
+.nav-item {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.nav-item.active { background: var(--accent); color: white; }
+
+.theme-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-main);
+}
+[data-theme="light"] .sun-icon { display: none; }
+[data-theme="light"] .moon-icon { display: block; }
+[data-theme="dark"] .sun-icon { display: block; color: #ffca28; }
+[data-theme="dark"] .moon-icon { display: none; }
+
+/* --- 5. 5x4 週期表網格 --- */
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    max-width: 650px;
+    margin: 20px auto;
+}
+.element-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.element-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+.atomic-number { position: absolute; top: 8px; left: 10px; font-size: 12px; font-weight: bold; color: var(--text-sub); }
+.symbol { font-size: 28px; font-weight: 800; }
+.name-zh { font-size: 15px; font-weight: 600; }
+.name-en { font-size: 10px; text-transform: uppercase; color: var(--text-sub); }
+
+/* --- 6. 按鈕與輸入框樣式 --- */
+.btn-main { padding: 10px 25px; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.element-card input { width: 50px; font-size: 18px; text-align: center; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-color); color: var(--text-main); }
+
+.correct { background-color: var(--correct-bg) !important; border-color: var(--correct-border) !important; }
+.wrong { background-color: var(--wrong-bg) !important; border-color: var(--wrong-border) !important; }
+
+/* --- 7. Modal 樣式 --- */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: var(--modal-overlay); backdrop-filter: blur(5px); }
+.modal-content { background-color: var(--card-bg); margin: 10% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; }
+.close-btn { position: absolute; right: 20px; top: 10px; font-size: 24px; cursor: pointer; }
+.input-group { margin: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+.modal input { width: 100px; padding: 8px; text-align: center; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-main); }
+.btn-submit { width: 100%; padding: 12px; margin-top: 20px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+.container { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+.page-content { display: none; text-align: center; }
+.page-content.active { display: block; }
+
+@media (max-width: 600px) {
+    .periodic-table { grid-template-columns: repeat(3, 1fr); }
+}
