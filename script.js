@@ -33,9 +33,11 @@ function showPage(pageId) {
     if(pageId === 'symbol-game') {
         document.getElementById('nav-symbol').classList.add('active');
         initSymbolTable();
-    } else {
+    } else if(pageId === 'structure-quiz') {
         document.getElementById('nav-structure').classList.add('active');
         initStructureGrid();
+    } else {
+        document.getElementById('nav-landing').classList.add('active');
     }
 }
 
@@ -124,5 +126,5 @@ document.getElementById('theme-toggle').onclick = () => {
 window.onload = () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    initSymbolTable();
+    showPage('landing');
 };
